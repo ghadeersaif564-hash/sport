@@ -1,4 +1,4 @@
-// التنقل بين الأقسام
+// التنقل بين أقسام الموقع
 function showSection(sectionId, element) {
     const sections = document.querySelectorAll('.page-section');
     sections.forEach(sec => sec.style.display = 'none');
@@ -19,25 +19,40 @@ function showSection(sectionId, element) {
     }
 }
 
-// محاكاة جهاز الأشعة
-const xrayData = {
-    brain: { icon: "🧠", title: "الجمجمة والدماغ", text: "الأشعة تظهر عظام الجمجمة الصلبة التي تحمي الدماغ الناعم بالداخل!" },
-    chest: { icon: "🫁", title: "القفص الصدري والرئتين", text: "الأضلاع تحمي القلب والرئتين مثل الدرع الفولاذي!" },
-    heart: { icon: "🫀", title: "القلب الأبطال", text: "يظهر القلب في منتصف الصدر، وينبض أكثر من 100 ألف مرة يومياً!" },
-    stomach: { icon: "🫄", title: "جهاز الهضم", text: "هنا يتم استقبال الطعام وتحويله إلى فيتامينات ونشاط!" },
-    hand: { icon: "🖐️", title: "عظام اليد", text: "تحتوي يدك الصغيرة على 27 عظمة تساعدك على الكتابة والرسم!" }
-};
-
-function scanBody(type) {
-    const item = xrayData[type];
-    if (item) {
-        document.getElementById('xrayIcon').innerText = item.icon;
-        document.getElementById('xrayTitle').innerText = item.title;
-        document.getElementById('xrayText').innerText = item.text;
+// معاينة صورة الطالب عند رفعها
+function previewStudentImage(event) {
+    const reader = new FileReader();
+    reader.onload = function() {
+        const output = document.getElementById('studentPhoto');
+        output.src = reader.result;
+        
+        // إعادة إخفاء الأشعة عند تغيير الصورة حتى يختار المعلم فحصاً جديداً
+        document.getElementById('xrayOverlay').classList.add('hidden');
+        document.getElementById('resultTitle').innerText = "تمت إضافة صورة الطالب بنجاح! 📸";
+        document.getElementById('resultText').innerText = "اختر الآن العضو المراد فحصه بالـ X-Ray من الأزرار أعلاه.";
+    };
+    if (event.target.files[0]) {
+        reader.readAsDataURL(event.target.files[0]);
     }
 }
 
-// مسابقة الطبيب الصغير
+// تشغيل مسح الأشعة السينية على صورة الطالب
+function scanOrgan(type, icon, title, description) {
+    const overlay = document.getElementById('xrayOverlay');
+    const skeletonIcon = document.getElementById('skeletonIcon');
+    const resultTitle = document.getElementById('resultTitle');
+    const resultText = document.getElementById('resultText');
+
+    // إظهار طبقة الأشعة والرمز
+    overlay.classList.remove('hidden');
+    skeletonIcon.innerText = icon;
+
+    // تحديث النتيجة والنص
+    resultTitle.innerText = `🔍 نتائج فحص: ${title}`;
+    resultText.innerText = description;
+}
+
+// لعبة اختبار الطبيب الصغير
 const quizQuestions = [
     { q: "ما هو العضو الذي يساعدنا على التفكير والحفظ؟", options: ["القلب", "الدماغ", "المعدة"], correct: 1 },
     { q: "ما هي العظام التي تحمي الرئتين والقلب؟", options: ["القفص الصدري", "الجمجمة", "عظام القدم"], correct: 0 },
@@ -83,7 +98,3 @@ function checkAnswer(selected) {
         feedback.innerText = '❌ حاول مرة أخرى!';
     }
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-    scanBody('brain');
-});
