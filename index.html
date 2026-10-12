@@ -10,22 +10,23 @@
 
     <header>
         <div class="header-container">
-            <h1 class="school-name">🩻 ماسح الأشعة السينية الرقمي للأطفال</h1>
+            <h1 class="school-name">🩻 ماسح الأشعة السينية والحركات الرياضية</h1>
         </div>
         
         <nav class="main-nav">
-            <button class="nav-btn active" onclick="showSection('student-xray', this)">📸 ماسح صورة الطالب</button>
-            <button class="nav-btn" onclick="showSection('organs', this)">🫀 أعضاء الجسم ووظائفها</button>
+            <button class="nav-btn active" onclick="showSection('student-xray', this)">📸 ماسح صور الطلاب</button>
+            <button class="nav-btn" onclick="showSection('xray-gallery', this)">🦴 معرض الأشعة الطبية</button>
+            <button class="nav-btn" onclick="showSection('sports', this)">⚽ الحركات الرياضية والعظام</button>
             <button class="nav-btn" onclick="showSection('quiz', this)">🩺 اختبار الطبيب الصغير</button>
         </nav>
     </header>
 
     <div class="container">
 
-        <!-- 📸 قسم رفع صورة الطالب وفحصها بالأشعة -->
+        <!-- 📸 قسم فحص صورة الطالب -->
         <section id="student-xray" class="page-section active">
             <h2 class="section-title">📸 فحص أشعة الطالب التفاعلي</h2>
-            <p class="section-desc">قم بتحميل صورة الطالب لرؤية هيكله العظمي وأعضائه الداخلية تحت الأشعة السينية!</p>
+            <p class="section-desc">قم بتحميل صورة الطالب لرؤية هيكله العظمي تحت الأشعة السينية!</p>
             
             <div class="upload-box">
                 <label for="imageUpload" class="upload-label">📁 اضغط هنا لتحميل صورة الطالب</label>
@@ -33,13 +34,9 @@
             </div>
 
             <div class="xray-workspace">
-                <!-- كارت عرض الصورة المرفوعة والأشعة -->
                 <div class="scanner-card">
                     <div class="image-wrapper">
-                        <!-- صورة الطالب المرفوعة -->
-                        <img id="studentPhoto" src="https://via.placeholder.com/300x380/1b263b/00b4d8?text=رفع+صورة+الطالب" alt="صورة الطالب">
-                        
-                        <!-- طبقة الأشعة السينية فوق صورة الطالب -->
+                        <img id="studentPhoto" src="https://via.placeholder.com/280x360/1b263b/00b4d8?text=صورة+الطالب" alt="صورة الطالب">
                         <div id="xrayOverlay" class="xray-overlay hidden">
                             <div id="skeletonIcon" class="skeleton-icon">🧠</div>
                             <div class="scan-line"></div>
@@ -47,17 +44,15 @@
                     </div>
                 </div>
 
-                <!-- لوحة التحكم بالفحص -->
                 <div class="scan-controls">
-                    <h3>🔍 اختر العضو المراد فحصه بالـ X-Ray:</h3>
+                    <h3>🔍 اختر العضو للفحص بالـ X-Ray:</h3>
                     <div class="xray-buttons">
-                        <button class="x-btn" onclick="scanOrgan('brain', '🧠', 'جمجمة الطالب والدماغ', 'تظهر الأشعة عظام الجمجمة الصلبة لحماية الدماغ والتفكير!')">🧠 فحص الدماغ والجمجمة</button>
-                        <button class="x-btn" onclick="scanOrgan('chest', '🫁', 'القفص الصدري والرئتين', 'تحمي الأضلاع العظمية الرئتين والقلب أثناء التنفس واللعب!')">🫁 القفص الصدري والرئتان</button>
-                        <button class="x-btn" onclick="scanOrgan('heart', '🫀', 'قلب الطالب الأنيق', 'ينبض قلب الطالب ليدفع الدم المحمل بالأكسجين لكامل الجسم!')">🫀 فحص القلب والأوعية</button>
-                        <button class="x-btn" onclick="scanOrgan('bones', '🦴', 'الهيكل العظمي الكامل', 'يعطي الهيكل العظمي الطالب القوام القوي والمستقيم!')">🦴 فحص الهيكل العظمي</button>
+                        <button class="x-btn" onclick="scanOrgan('brain', '🧠', 'جمجمة الطالب والدماغ', 'تظهر الأشعة عظام الجمجمة الصلبة لحماية الدماغ!')">🧠 فحص الدماغ والجمجمة</button>
+                        <button class="x-btn" onclick="scanOrgan('chest', '🫁', 'القفص الصدري والرئتين', 'تحمي الأضلاع العظمية القلب والرئتين أثناء التنفس!')">🫁 القفص الصدري والرئتان</button>
+                        <button class="x-btn" onclick="scanOrgan('hand', '🖐️', 'عظام اليد والأصابع', 'تحتوي يد الطالب على 27 عظمة دقيقة للكتابة والرسم!')">🖐️ فحص عظام اليد</button>
+                        <button class="x-btn" onclick="scanOrgan('bones', '🦴', 'الهيكل العظمي الكامل', 'يعطي الهيكل العظمي الجسم الدعامة والحماية والقوة!')">🦴 فحص الهيكل العظمي العام</button>
                     </div>
 
-                    <!-- نتيجة الفحص الطبي -->
                     <div id="resultBox" class="result-box">
                         <h4 id="resultTitle">بانتظار إجراء الفحص...</h4>
                         <p id="resultText">اختر أحد الأزرار أعلاه لبدء مسح الأشعة السينية على صورة الطالب.</p>
@@ -66,18 +61,88 @@
             </div>
         </section>
 
-        <!-- 🫀 قسم أعضاء الجسم -->
-        <section id="organs" class="page-section">
-            <h2 class="section-title">🫁 رحلة داخل جسم الإنسان</h2>
+        <!-- 🦴 معرض الأشعة الطبية المتنوعة -->
+        <section id="xray-gallery" class="page-section">
+            <h2 class="section-title">🦴 معرض صور الأشعة الطبية الحقيقية (X-Ray)</h2>
+            <p class="section-desc">اضغط على أي بطاقة لرؤية تفاصيل الأشعة العظمية لمختلف أجزاء الجسم!</p>
+            
             <div class="grid">
-                <div class="card"><div class="card-icon">🧠</div><h3>الدماغ (Brain)</h3><p>مركز التحكم والذكاء والتفكير!</p></div>
-                <div class="card"><div class="card-icon">🫀</div><h3>القلب (Heart)</h3><p>المحرك الذي يدفع الدم لجميع أعضاء الجسم.</p></div>
-                <div class="card"><div class="card-icon">🫁</div><h3>الرئتان (Lungs)</h3><p>تزودان الجسم بالأكسجين أثناء الشهيق والزفير.</p></div>
-                <div class="card"><div class="card-icon">🦴</div><h3>العظام (Bones)</h3><p>تحمي الأعضاء الداخلية وتمنح القوة والحركة.</p></div>
+                <div class="card" onclick="showXrayInfo('الكتف والترقوة', 'تظهر هذه الأشعة مفصل الكتف وعظمة الترقوة التي تربط الذراع بالقفص الصدري[cite: 9].')">
+                    <div class="card-icon">🦴</div>
+                    <h3>أشعة الكتف والترقوة</h3>
+                    <p>تعرف على عظام الكتف والترقوة[cite: 9].</p>
+                </div>
+
+                <div class="card" onclick="showXrayInfo('كف اليد والأصابع', 'توضح عظام الكف الدقيقة والرسغ التي تمكننا من الإمساك بالأشياء والكتابة[cite: 9].')">
+                    <div class="card-icon">🖐️</div>
+                    <h3>أشعة كف اليد</h3>
+                    <p>تفاصيل عظام الأصابع والرسغ[cite: 9].</p>
+                </div>
+
+                <div class="card" onclick="showXrayInfo('مفصل الكوع والذراع', 'يظهر مفصل الكوع الذي يربط عظام الذراع ويسمح لليد بالثني والحركة بسلاسة[cite: 9].')">
+                    <div class="card-icon">💪</div>
+                    <h3>أشعة الكوع والذراع</h3>
+                    <p>استكشاف مفصل الذراع القوي[cite: 9].</p>
+                </div>
+
+                <div class="card" onclick="showXrayInfo('عظام القدم والأصابع', 'تظهر 26 عظمة في القدم تحامل وزن الجسم وتساعدنا على المشي والجري[cite: 9].')">
+                    <div class="card-icon">🦶</div>
+                    <h3>أشعة القدم والأصابع</h3>
+                    <p>عظام القدم الحاملة للجسم[cite: 9].</p>
+                </div>
+
+                <div class="card" onclick="showXrayInfo('منطقة الحوض والعمود الفقري', 'منطقة الحوض تدعم الجزء العلوي من الجسم وتحمي الأعضاء الحساسة بالأسفل[cite: 9].')">
+                    <div class="card-icon">🦴</div>
+                    <h3>أشعة الحوض</h3>
+                    <p>دعامة الجسم وعظمة الحوض[cite: 9].</p>
+                </div>
+
+                <div class="card" onclick="showXrayInfo('الفقرات العنقية والرقبة', 'سلسلة الفقرات التي تحمي الحبل الشوكي وتسمح للرأس بالالتفاف في كل الاتجاهات[cite: 9].')">
+                    <div class="card-icon">🗣️</div>
+                    <h3>أشعة الرقبة والفقرات</h3>
+                    <p>فقرات الرقبة والجمجمة[cite: 9].</p>
+                </div>
+            </div>
+
+            <div id="galleryResultBox" class="result-box gallery-info">
+                <h4 id="galleryTitle">اختر بطاقة أشعة من الأعلى 👆</h4>
+                <p id="galleryText">انقر على أي بطاقة لعرض الشرح الطبي المبسط المخصص للأطفال.</p>
             </div>
         </section>
 
-        <!-- 🩺 قسم الاختيارات -->
+        <!-- ⚽ الحركات الرياضية والعظام -->
+        <section id="sports" class="page-section">
+            <h2 class="section-title">⚽ الحركات الرياضية وتأثيرها على صحة العظام</h2>
+            <p class="section-desc">الرياضة تقوي العضلات والمفاصل وتحافظ على لياقة جسمك الذكي!</p>
+            
+            <div class="grid">
+                <div class="card">
+                    <div class="card-icon">⚽</div>
+                    <h3>لعبة كرة القدم</h3>
+                    <p>تقوي عظام الساقين والقدمين، وتحسن التوازن وقوة التحمل البدني.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🏀</div>
+                    <h3>القفز وكرة السلة</h3>
+                    <p>حركة القفز تضغط بلطف على العظام وتدفعها لتنمو بشكل أطول وأقوى!</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🏊‍♂️</div>
+                    <h3>السباحة النشطة</h3>
+                    <p>تحرك جميع عضلات ومفاصل الجسم دون إجهاد، وتبني كتفاً وعموداً فقرياً سليماً.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🚴‍♂️</div>
+                    <h3>ركوب الدراجات</h3>
+                    <p>يقوي مفاصل الركبة وعضلات الفخذين وينشط الدورة الدموية للقلب.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 🩺 اختبار الطبيب الصغير -->
         <section id="quiz" class="page-section">
             <h2 class="section-title">🩺 اختبر معلوماتك يا طبيب المستقبل</h2>
             <div class="card quiz-card">
