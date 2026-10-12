@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مستكشف جسم الإنسان والأشعة 🦴</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- الهيدر والقائمة -->
+    <header>
+        <div class="header-container">
+            <img src="logo.png" alt="شعار الموقع" class="school-logo">
+            <h1 class="school-name">🩻 مستكشف الجسم والأشعة للأطفال</h1>
+        </div>
+        
+        <nav class="main-nav">
+            <button class="nav-btn active" onclick="showSection('xray', this)">🩻 جهاز الأشعة التفاعلي</button>
+            <button class="nav-btn" onclick="showSection('organs', this)">🫀 أعضاء الجسم ووظائفها</button>
+            <button class="nav-btn" onclick="showSection('quiz', this)">🧩 اختبار الطبيب الصغير</button>
+        </nav>
+    </header>
+
+    <div class="container">
+
+        <!-- 🩻 قسم فحص الأشعة التفاعلي -->
+        <section id="xray" class="page-section active">
+            <h2 class="section-title">🔍 غرفة الأشعة السينية (X-Ray)</h2>
+            <p class="section-desc">اضغط على العضو لترى العظام والأعضاء تحت الأشعة!</p>
+            
+            <div class="xray-container">
+                <div class="body-frame">
+                    <div id="xrayDisplay" class="xray-screen">
+                        <div id="xrayIcon" class="xray-icon">🧠</div>
+                        <h3 id="xrayTitle">الدماغ والعظام</h3>
+                        <p id="xrayText">الجمجمة تحمي الدماغ الذي يفكر ويتحكم في كل جسمك!</p>
+                    </div>
+                </div>
+
+                <div class="xray-buttons">
+                    <button class="x-btn" onclick="scanBody('brain')">🧠 الجمجمة والدماغ</button>
+                    <button class="x-btn" onclick="scanBody('chest')">🫁 القفص الصدري والرئتين</button>
+                    <button class="x-btn" onclick="scanBody('heart')">🫀 القلب والأوعية</button>
+                    <button class="x-btn" onclick="scanBody('stomach')">🫄 المعدة والجهاز الهضمي</button>
+                    <button class="x-btn" onclick="scanBody('hand')">🖐️ عظام اليد واليدين</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 🫀 قسم وظائف الأعضاء -->
+        <section id="organs" class="page-section">
+            <h2 class="section-title">🫁 رحلة داخل جسم الإنسان</h2>
+            <div class="grid">
+                
+                <div class="card">
+                    <div class="card-icon">🧠</div>
+                    <h3>الدماغ (Brain)</h3>
+                    <p>مركز التحكم في الجسم! يفكر، يحفظ المعلومات، ويخبر جسمك كيف يتحرك.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🫀</div>
+                    <h3>القلب (Heart)</h3>
+                    <p>المحرك القوي! ينبض باستمرار ليدفع الدم إلى جميع أجزاء جسمك.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🫁</div>
+                    <h3>الرئتان (Lungs)</h3>
+                    <p>مصنع الأكسجين! تأخذ الهواء النقي أثناء التنفس لتساعدك على العيش.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🍖</div>
+                    <h3>الهيكل العظمي (Bones)</h3>
+                    <p>دعامة الجسم! يعطيك الشكل ويحمي الأعضاء الداخلية الهامة مثل القلب والدماغ.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🥭</div>
+                    <h3>المعدة (Stomach)</h3>
+                    <p>الخلاط الذكي! تهضم الطعام وتحوله إلى طاقة تساعدك على اللعب والنمو.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 🧩 قسم اختبار الطبيب الصغير -->
+        <section id="quiz" class="page-section">
+            <h2 class="section-title">🩺 اختبر معلوماتك يا طبيب المستقبل</h2>
+            <div class="card quiz-card">
+                <h3 id="quizQuestion">جاري تحميل السؤال...</h3>
+                <div id="quizOptions" class="options-container"></div>
+                <p id="quizFeedback" class="feedback-msg"></p>
+                <p class="score-text">النقاط: <span id="scoreDisplay">0</span> ⭐</p>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

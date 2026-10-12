@@ -1,0 +1,89 @@
+// التنقل بين الأقسام
+function showSection(sectionId, element) {
+    const sections = document.querySelectorAll('.page-section');
+    sections.forEach(sec => sec.style.display = 'none');
+
+    const buttons = document.querySelectorAll('.nav-btn');
+    buttons.forEach(btn => btn.classList.remove('active'));
+
+    const activeSection = document.getElementById(sectionId);
+    if (activeSection) {
+        activeSection.style.display = 'block';
+    }
+    if (element) {
+        element.classList.add('active');
+    }
+
+    if (sectionId === 'quiz') {
+        loadQuiz();
+    }
+}
+
+// محاكاة جهاز الأشعة
+const xrayData = {
+    brain: { icon: "🧠", title: "الجمجمة والدماغ", text: "الأشعة تظهر عظام الجمجمة الصلبة التي تحمي الدماغ الناعم بالداخل!" },
+    chest: { icon: "🫁", title: "القفص الصدري والرئتين", text: "الأضلاع تحمي القلب والرئتين مثل الدرع الفولاذي!" },
+    heart: { icon: "🫀", title: "القلب الأبطال", text: "يظهر القلب في منتصف الصدر، وينبض أكثر من 100 ألف مرة يومياً!" },
+    stomach: { icon: "🫄", title: "جهاز الهضم", text: "هنا يتم استقبال الطعام وتحويله إلى فيتامينات ونشاط!" },
+    hand: { icon: "🖐️", title: "عظام اليد", text: "تحتوي يدك الصغيرة على 27 عظمة تساعدك على الكتابة والرسم!" }
+};
+
+function scanBody(type) {
+    const item = xrayData[type];
+    if (item) {
+        document.getElementById('xrayIcon').innerText = item.icon;
+        document.getElementById('xrayTitle').innerText = item.title;
+        document.getElementById('xrayText').innerText = item.text;
+    }
+}
+
+// مسابقة الطبيب الصغير
+const quizQuestions = [
+    { q: "ما هو العضو الذي يساعدنا على التفكير والحفظ؟", options: ["القلب", "الدماغ", "المعدة"], correct: 1 },
+    { q: "ما هي العظام التي تحمي الرئتين والقلب؟", options: ["القفص الصدري", "الجمجمة", "عظام القدم"], correct: 0 },
+    { q: "ما وظيفة القلب الأساسية؟", options: ["هضم الطعام", "ضخ الدم للجسم", "التنفس"], correct: 1 }
+];
+
+let currentQ = 0;
+let score = 0;
+
+function loadQuiz() {
+    if (currentQ >= quizQuestions.length) currentQ = 0;
+    
+    const qData = quizQuestions[currentQ];
+    document.getElementById('quizQuestion').innerText = qData.q;
+    
+    const optionsDiv = document.getElementById('quizOptions');
+    optionsDiv.innerHTML = '';
+
+    qData.options.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn';
+        btn.innerText = opt;
+        btn.onclick = () => checkAnswer(idx);
+        optionsDiv.appendChild(btn);
+    });
+    
+    document.getElementById('quizFeedback').innerText = '';
+}
+
+function checkAnswer(selected) {
+    const qData = quizQuestions[currentQ];
+    const feedback = document.getElementById('quizFeedback');
+
+    if (selected === qData.correct) {
+        feedback.style.color = '#00f5d4';
+        feedback.innerText = '🎉 إجابة صحيحة يا طبيب المستقبل!';
+        score += 10;
+        document.getElementById('scoreDisplay').innerText = score;
+        currentQ++;
+        setTimeout(loadQuiz, 1500);
+    } else {
+        feedback.style.color = '#ff0054';
+        feedback.innerText = '❌ حاول مرة أخرى!';
+    }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    scanBody('brain');
+});
