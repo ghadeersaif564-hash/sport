@@ -3,90 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مستكشف جسم الإنسان والأشعة 🦴</title>
+    <title>مستكشف الأشعة الرقمي للطلاب 🩻</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- الهيدر والقائمة -->
     <header>
         <div class="header-container">
-            <img src="logo.png" alt="شعار الموقع" class="school-logo">
-            <h1 class="school-name">🩻 مستكشف الجسم والأشعة للأطفال</h1>
+            <h1 class="school-name">🩻 ماسح الأشعة السينية الرقمي للأطفال</h1>
         </div>
         
         <nav class="main-nav">
-            <button class="nav-btn active" onclick="showSection('xray', this)">🩻 جهاز الأشعة التفاعلي</button>
+            <button class="nav-btn active" onclick="showSection('student-xray', this)">📸 ماسح صورة الطالب</button>
             <button class="nav-btn" onclick="showSection('organs', this)">🫀 أعضاء الجسم ووظائفها</button>
-            <button class="nav-btn" onclick="showSection('quiz', this)">🧩 اختبار الطبيب الصغير</button>
+            <button class="nav-btn" onclick="showSection('quiz', this)">🩺 اختبار الطبيب الصغير</button>
         </nav>
     </header>
 
     <div class="container">
 
-        <!-- 🩻 قسم فحص الأشعة التفاعلي -->
-        <section id="xray" class="page-section active">
-            <h2 class="section-title">🔍 غرفة الأشعة السينية (X-Ray)</h2>
-            <p class="section-desc">اضغط على العضو لترى العظام والأعضاء تحت الأشعة!</p>
+        <!-- 📸 قسم رفع صورة الطالب وفحصها بالأشعة -->
+        <section id="student-xray" class="page-section active">
+            <h2 class="section-title">📸 فحص أشعة الطالب التفاعلي</h2>
+            <p class="section-desc">قم بتحميل صورة الطالب لرؤية هيكله العظمي وأعضائه الداخلية تحت الأشعة السينية!</p>
             
-            <div class="xray-container">
-                <div class="body-frame">
-                    <div id="xrayDisplay" class="xray-screen">
-                        <div id="xrayIcon" class="xray-icon">🧠</div>
-                        <h3 id="xrayTitle">الدماغ والعظام</h3>
-                        <p id="xrayText">الجمجمة تحمي الدماغ الذي يفكر ويتحكم في كل جسمك!</p>
+            <div class="upload-box">
+                <label for="imageUpload" class="upload-label">📁 اضغط هنا لتحميل صورة الطالب</label>
+                <input type="file" id="imageUpload" accept="image/*" onchange="previewStudentImage(event)">
+            </div>
+
+            <div class="xray-workspace">
+                <!-- كارت عرض الصورة المرفوعة والأشعة -->
+                <div class="scanner-card">
+                    <div class="image-wrapper">
+                        <!-- صورة الطالب المرفوعة -->
+                        <img id="studentPhoto" src="https://via.placeholder.com/300x380/1b263b/00b4d8?text=رفع+صورة+الطالب" alt="صورة الطالب">
+                        
+                        <!-- طبقة الأشعة السينية فوق صورة الطالب -->
+                        <div id="xrayOverlay" class="xray-overlay hidden">
+                            <div id="skeletonIcon" class="skeleton-icon">🧠</div>
+                            <div class="scan-line"></div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="xray-buttons">
-                    <button class="x-btn" onclick="scanBody('brain')">🧠 الجمجمة والدماغ</button>
-                    <button class="x-btn" onclick="scanBody('chest')">🫁 القفص الصدري والرئتين</button>
-                    <button class="x-btn" onclick="scanBody('heart')">🫀 القلب والأوعية</button>
-                    <button class="x-btn" onclick="scanBody('stomach')">🫄 المعدة والجهاز الهضمي</button>
-                    <button class="x-btn" onclick="scanBody('hand')">🖐️ عظام اليد واليدين</button>
+                <!-- لوحة التحكم بالفحص -->
+                <div class="scan-controls">
+                    <h3>🔍 اختر العضو المراد فحصه بالـ X-Ray:</h3>
+                    <div class="xray-buttons">
+                        <button class="x-btn" onclick="scanOrgan('brain', '🧠', 'جمجمة الطالب والدماغ', 'تظهر الأشعة عظام الجمجمة الصلبة لحماية الدماغ والتفكير!')">🧠 فحص الدماغ والجمجمة</button>
+                        <button class="x-btn" onclick="scanOrgan('chest', '🫁', 'القفص الصدري والرئتين', 'تحمي الأضلاع العظمية الرئتين والقلب أثناء التنفس واللعب!')">🫁 القفص الصدري والرئتان</button>
+                        <button class="x-btn" onclick="scanOrgan('heart', '🫀', 'قلب الطالب الأنيق', 'ينبض قلب الطالب ليدفع الدم المحمل بالأكسجين لكامل الجسم!')">🫀 فحص القلب والأوعية</button>
+                        <button class="x-btn" onclick="scanOrgan('bones', '🦴', 'الهيكل العظمي الكامل', 'يعطي الهيكل العظمي الطالب القوام القوي والمستقيم!')">🦴 فحص الهيكل العظمي</button>
+                    </div>
+
+                    <!-- نتيجة الفحص الطبي -->
+                    <div id="resultBox" class="result-box">
+                        <h4 id="resultTitle">بانتظار إجراء الفحص...</h4>
+                        <p id="resultText">اختر أحد الأزرار أعلاه لبدء مسح الأشعة السينية على صورة الطالب.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- 🫀 قسم وظائف الأعضاء -->
+        <!-- 🫀 قسم أعضاء الجسم -->
         <section id="organs" class="page-section">
             <h2 class="section-title">🫁 رحلة داخل جسم الإنسان</h2>
             <div class="grid">
-                
-                <div class="card">
-                    <div class="card-icon">🧠</div>
-                    <h3>الدماغ (Brain)</h3>
-                    <p>مركز التحكم في الجسم! يفكر، يحفظ المعلومات، ويخبر جسمك كيف يتحرك.</p>
-                </div>
-
-                <div class="card">
-                    <div class="card-icon">🫀</div>
-                    <h3>القلب (Heart)</h3>
-                    <p>المحرك القوي! ينبض باستمرار ليدفع الدم إلى جميع أجزاء جسمك.</p>
-                </div>
-
-                <div class="card">
-                    <div class="card-icon">🫁</div>
-                    <h3>الرئتان (Lungs)</h3>
-                    <p>مصنع الأكسجين! تأخذ الهواء النقي أثناء التنفس لتساعدك على العيش.</p>
-                </div>
-
-                <div class="card">
-                    <div class="card-icon">🍖</div>
-                    <h3>الهيكل العظمي (Bones)</h3>
-                    <p>دعامة الجسم! يعطيك الشكل ويحمي الأعضاء الداخلية الهامة مثل القلب والدماغ.</p>
-                </div>
-
-                <div class="card">
-                    <div class="card-icon">🥭</div>
-                    <h3>المعدة (Stomach)</h3>
-                    <p>الخلاط الذكي! تهضم الطعام وتحوله إلى طاقة تساعدك على اللعب والنمو.</p>
-                </div>
-
+                <div class="card"><div class="card-icon">🧠</div><h3>الدماغ (Brain)</h3><p>مركز التحكم والذكاء والتفكير!</p></div>
+                <div class="card"><div class="card-icon">🫀</div><h3>القلب (Heart)</h3><p>المحرك الذي يدفع الدم لجميع أعضاء الجسم.</p></div>
+                <div class="card"><div class="card-icon">🫁</div><h3>الرئتان (Lungs)</h3><p>تزودان الجسم بالأكسجين أثناء الشهيق والزفير.</p></div>
+                <div class="card"><div class="card-icon">🦴</div><h3>العظام (Bones)</h3><p>تحمي الأعضاء الداخلية وتمنح القوة والحركة.</p></div>
             </div>
         </section>
 
-        <!-- 🧩 قسم اختبار الطبيب الصغير -->
+        <!-- 🩺 قسم الاختيارات -->
         <section id="quiz" class="page-section">
             <h2 class="section-title">🩺 اختبر معلوماتك يا طبيب المستقبل</h2>
             <div class="card quiz-card">
