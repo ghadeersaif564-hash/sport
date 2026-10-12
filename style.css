@@ -21,23 +21,10 @@ header {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
 }
 
-.header-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    margin-bottom: 15px;
-}
-
-.school-logo {
-    height: 60px;
-    width: auto;
-}
-
 .school-name {
-    margin: 0;
+    margin: 0 0 15px 0;
     font-size: 1.8rem;
-    color: #778da9;
+    color: #90e0ef;
 }
 
 .main-nav {
@@ -67,7 +54,7 @@ header {
 .section-title {
     text-align: center;
     color: #90e0ef;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 .section-desc {
@@ -84,122 +71,173 @@ header {
     display: block !important;
 }
 
-/* 🩻 شاشة الأشعة */
-.xray-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-}
-
-.xray-screen {
-    background-color: #000814;
-    border: 4px solid #00b4d8;
-    box-shadow: 0 0 20px rgba(0, 180, 216, 0.5);
-    border-radius: 15px;
-    padding: 30px;
-    width: 320px;
+/* زر تحميل صورة الطالب */
+.upload-box {
     text-align: center;
-    min-height: 180px;
+    margin-bottom: 25px;
 }
 
-.xray-icon {
-    font-size: 4rem;
-    margin-bottom: 10px;
+.upload-label {
+    background-color: #00b4d8;
+    color: #0d1b2a;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    display: inline-block;
+    transition: 0.3s;
+    box-shadow: 0 0 10px rgba(0, 180, 216, 0.4);
+}
+
+.upload-label:hover {
+    background-color: #90e0ef;
+    transform: scale(1.03);
+}
+
+#imageUpload {
+    display: none;
+}
+
+/* بيئة العمل وعرض الأشعة */
+.xray-workspace {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.scanner-card {
+    background: #1b263b;
+    border: 3px solid #00b4d8;
+    border-radius: 20px;
+    padding: 15px;
+    box-shadow: 0 0 25px rgba(0, 180, 216, 0.3);
+}
+
+.image-wrapper {
+    position: relative;
+    width: 280px;
+    height: 360px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #000;
+}
+
+#studentPhoto {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* طبقة الأشعة الخضراء/الزرقاء */
+.xray-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 20, 40, 0.85);
+    border: 2px solid #00f5d4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    animation: fadeIn 0.4s ease;
+}
+
+.xray-overlay.hidden {
+    display: none;
+}
+
+.skeleton-icon {
+    font-size: 6rem;
+    filter: drop-shadow(0 0 15px #00f5d4);
+    animation: pulse 1.5s infinite alternate;
+}
+
+/* خط الأشعة الممسوح */
+.scan-line {
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    background: #00f5d4;
+    box-shadow: 0 0 15px #00f5d4;
+    animation: scanMove 2s infinite linear;
+}
+
+@keyframes scanMove {
+    0% { top: 0%; }
+    100% { top: 100%; }
+}
+
+@keyframes pulse {
+    0% { transform: scale(0.95); }
+    100% { transform: scale(1.1); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* التحكم بالأزرار والنتائج */
+.scan-controls {
+    max-width: 400px;
+    flex: 1;
 }
 
 .xray-buttons {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column;
     gap: 10px;
+    margin-bottom: 20px;
 }
 
 .x-btn {
     background-color: #1b263b;
-    border: 1px solid #00b4d8;
+    border: 2px solid #00b4d8;
     color: #fff;
-    padding: 10px 15px;
-    border-radius: 10px;
+    padding: 12px 18px;
+    border-radius: 12px;
     cursor: pointer;
-    font-size: 0.95rem;
+    font-size: 1rem;
+    text-align: right;
     transition: 0.2s;
 }
 
 .x-btn:hover {
     background-color: #00b4d8;
-    color: #000;
+    color: #0d1b2a;
+    font-weight: bold;
 }
 
-/* 🎴 كروت الأعضاء */
-.grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-}
-
-.card {
+.result-box {
     background: #1b263b;
-    border-radius: 15px;
-    padding: 20px;
-    text-align: center;
-    width: 260px;
-    border: 1px solid #415a77;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    border-right: 4px solid #00f5d4;
+    padding: 15px;
+    border-radius: 10px;
 }
 
-.card-icon {
-    font-size: 3rem;
-    margin-bottom: 10px;
+.result-box h4 {
+    margin: 0 0 8px 0;
+    color: #00f5d4;
 }
 
-.card h3 {
-    color: #90e0ef;
-    margin-bottom: 10px;
-}
-
-.card p {
-    color: #e0e1dd;
+.result-box p {
+    margin: 0;
     font-size: 0.95rem;
     line-height: 1.5;
+    color: #e0e1dd;
 }
 
-/* 🩺 الاختبار */
-.quiz-card {
-    margin: 0 auto;
-    width: 90%;
-    max-width: 500px;
-}
-
-.options-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 15px;
-}
-
-.opt-btn {
-    background: #415a77;
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1rem;
-}
-
-.opt-btn:hover {
-    background: #00b4d8;
-    color: black;
-}
-
-.feedback-msg {
-    font-weight: bold;
-    margin-top: 15px;
-}
-
-.score-text {
-    font-size: 1.2rem;
-    color: #ffd166;
-}
+/* الكروت والاختبارات */
+.grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+.card { background: #1b263b; border-radius: 15px; padding: 20px; text-align: center; width: 220px; border: 1px solid #415a77; }
+.card-icon { font-size: 3rem; }
+.quiz-card { margin: 0 auto; max-width: 500px; text-align: center; }
+.options-container { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
+.opt-btn { background: #415a77; color: white; border: none; padding: 10px; border-radius: 8px; cursor: pointer; font-size: 1rem; }
+.opt-btn:hover { background: #00b4d8; color: black; }
+.feedback-msg { font-weight: bold; margin-top: 10px; }
+.score-text { font-size: 1.2rem; color: #ffd166; }
