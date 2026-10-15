@@ -5,7 +5,6 @@ body {
     margin: 0;
     padding: 0;
     direction: rtl;
-    text-align: right;
 }
 
 .container {
@@ -61,7 +60,7 @@ header {
 .section-desc {
     text-align: center;
     color: #e0e1dd;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
 .page-section {
@@ -72,28 +71,27 @@ header {
     display: block !important;
 }
 
-/* صندوق رفع الصور */
+/* زر تحميل صورة الطالب */
 .upload-box {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
 .upload-label {
     background-color: #00b4d8;
     color: #0d1b2a;
-    padding: 14px 28px;
-    border-radius: 30px;
+    padding: 12px 25px;
+    border-radius: 25px;
     font-weight: bold;
     cursor: pointer;
     display: inline-block;
     transition: 0.3s;
-    box-shadow: 0 0 15px rgba(0, 180, 216, 0.4);
-    font-size: 1.1rem;
+    box-shadow: 0 0 10px rgba(0, 180, 216, 0.4);
 }
 
 .upload-label:hover {
     background-color: #90e0ef;
-    transform: scale(1.05);
+    transform: scale(1.03);
 }
 
 #imageUpload {
@@ -105,7 +103,7 @@ header {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     gap: 30px;
 }
 
@@ -132,19 +130,20 @@ header {
     object-fit: cover;
 }
 
-/* طبقة الأشعة */
+/* طبقة الأشعة الخضراء/الزرقاء */
 .xray-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 20, 40, 0.88);
+    background: rgba(0, 20, 40, 0.85);
     border: 2px solid #00f5d4;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    animation: fadeIn 0.4s ease;
 }
 
 .xray-overlay.hidden {
@@ -152,11 +151,12 @@ header {
 }
 
 .skeleton-icon {
-    font-size: 5rem;
+    font-size: 6rem;
     filter: drop-shadow(0 0 15px #00f5d4);
-    margin-bottom: 10px;
+    animation: pulse 1.5s infinite alternate;
 }
 
+/* خط الأشعة الممسوح */
 .scan-line {
     position: absolute;
     width: 100%;
@@ -171,17 +171,20 @@ header {
     100% { top: 100%; }
 }
 
-/* أزرار التحكم بالفحص */
-.scan-controls {
-    width: 350px;
-    max-width: 100%;
+@keyframes pulse {
+    0% { transform: scale(0.95); }
+    100% { transform: scale(1.1); }
 }
 
-.scan-controls h3 {
-    color: #90e0ef;
-    font-size: 1.1rem;
-    margin-bottom: 15px;
-    text-align: center;
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* التحكم بالأزرار والنتائج */
+.scan-controls {
+    max-width: 400px;
+    flex: 1;
 }
 
 .xray-buttons {
@@ -201,12 +204,12 @@ header {
     font-size: 1rem;
     text-align: right;
     transition: 0.2s;
-    font-weight: bold;
 }
 
 .x-btn:hover {
     background-color: #00b4d8;
     color: #0d1b2a;
+    font-weight: bold;
 }
 
 .result-box {
@@ -214,7 +217,6 @@ header {
     border-right: 4px solid #00f5d4;
     padding: 15px;
     border-radius: 10px;
-    border: 1px solid #415a77;
 }
 
 .result-box h4 {
@@ -229,13 +231,13 @@ header {
     color: #e0e1dd;
 }
 
-/* الأقسام الأخرى */
+/* الكروت والاختبارات */
 .grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
 .card { background: #1b263b; border-radius: 15px; padding: 20px; text-align: center; width: 220px; border: 1px solid #415a77; }
-.card-icon { font-size: 3rem; margin-bottom: 10px; }
+.card-icon { font-size: 3rem; }
 .quiz-card { margin: 0 auto; max-width: 500px; text-align: center; }
 .options-container { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
-.opt-btn { background: #415a77; color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-size: 1rem; }
+.opt-btn { background: #415a77; color: white; border: none; padding: 10px; border-radius: 8px; cursor: pointer; font-size: 1rem; }
 .opt-btn:hover { background: #00b4d8; color: black; }
 .feedback-msg { font-weight: bold; margin-top: 10px; }
-.score-text { font-size: 1.2rem; color: #ffd166; margin-top: 15px; }
+.score-text { font-size: 1.2rem; color: #ffd166; }
