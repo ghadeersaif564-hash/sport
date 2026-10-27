@@ -72,33 +72,6 @@ header {
     display: block !important;
 }
 
-.upload-box {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.upload-label {
-    background-color: #00b4d8;
-    color: #0d1b2a;
-    padding: 14px 28px;
-    border-radius: 30px;
-    font-weight: bold;
-    cursor: pointer;
-    display: inline-block;
-    transition: 0.3s;
-    box-shadow: 0 0 15px rgba(0, 180, 216, 0.4);
-    font-size: 1.1rem;
-}
-
-.upload-label:hover {
-    background-color: #90e0ef;
-    transform: scale(1.05);
-}
-
-#imageUpload {
-    display: none;
-}
-
 .xray-workspace {
     display: flex;
     flex-wrap: wrap;
@@ -117,44 +90,19 @@ header {
 
 .image-wrapper {
     position: relative;
-    width: 280px;
-    height: 360px;
+    width: 300px;
+    height: 380px;
     border-radius: 12px;
     overflow: hidden;
     background: #000;
-}
-
-#studentPhoto {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* طبقة الأشعة الحقيقية */
-.xray-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 10, 25, 0.9);
     border: 2px solid #00f5d4;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
 }
 
-.xray-overlay.hidden {
-    display: none !important;
-}
-
-#xrayRealImage {
+#displayXrayImage {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    mix-blend-mode: screen;
-    filter: contrast(150%) brightness(120%);
+    filter: contrast(140%) brightness(110%);
 }
 
 .scan-line {
@@ -172,7 +120,7 @@ header {
 }
 
 .scan-controls {
-    width: 350px;
+    width: 380px;
     max-width: 100%;
 }
 
@@ -186,7 +134,7 @@ header {
 .xray-buttons {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
     margin-bottom: 20px;
 }
 
