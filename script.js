@@ -1,4 +1,3 @@
-// التنقل بين أقسام الموقع
 function showSection(sectionId, element) {
     const sections = document.querySelectorAll('.page-section');
     sections.forEach(sec => sec.style.display = 'none');
@@ -19,44 +18,38 @@ function showSection(sectionId, element) {
     }
 }
 
-// معاينة صورة الطالب عند رفعها
 function previewStudentImage(event) {
     const reader = new FileReader();
     reader.onload = function() {
         const output = document.getElementById('studentPhoto');
         output.src = reader.result;
-        
-        // إعادة إخفاء الأشعة عند تغيير الصورة حتى يختار المعلم فحصاً جديداً
         document.getElementById('xrayOverlay').classList.add('hidden');
         document.getElementById('resultTitle').innerText = "تمت إضافة صورة الطالب بنجاح! 📸";
-        document.getElementById('resultText').innerText = "اختر الآن العضو المراد فحصه بالـ X-Ray من الأزرار أعلاه.";
+        document.getElementById('resultText').innerText = "اختاري نوع الأشعة السينية الحقيقية من الأزرار أعلاه لمسحها فوق صورة الطالب.";
     };
     if (event.target.files[0]) {
         reader.readAsDataURL(event.target.files[0]);
     }
 }
 
-// تشغيل مسح الأشعة السينية على صورة الطالب
-function scanOrgan(type, icon, title, description) {
+// تفعيل عرض صورة الأشعة الحقيقية فوق صورة الطالب
+function scanRealXray(type, title, imageUrl, description) {
     const overlay = document.getElementById('xrayOverlay');
-    const skeletonIcon = document.getElementById('skeletonIcon');
+    const realImg = document.getElementById('xrayRealImage');
     const resultTitle = document.getElementById('resultTitle');
     const resultText = document.getElementById('resultText');
 
-    // إظهار طبقة الأشعة والرمز
+    realImg.src = imageUrl;
     overlay.classList.remove('hidden');
-    skeletonIcon.innerText = icon;
-
-    // تحديث النتيجة والنص
+    
     resultTitle.innerText = `🔍 نتائج فحص: ${title}`;
     resultText.innerText = description;
 }
 
-// لعبة اختبار الطبيب الصغير
 const quizQuestions = [
-    { q: "ما هو العضو الذي يساعدنا على التفكير والحفظ؟", options: ["القلب", "الدماغ", "المعدة"], correct: 1 },
-    { q: "ما هي العظام التي تحمي الرئتين والقلب؟", options: ["القفص الصدري", "الجمجمة", "عظام القدم"], correct: 0 },
-    { q: "ما وظيفة القلب الأساسية؟", options: ["هضم الطعام", "ضخ الدم للجسم", "التنفس"], correct: 1 }
+    { q: "أي نوع من الأشعة يظهر عظام الجمجمة التي تحمي الدماغ؟", options: ["أشعة الجمجمة والراس", "أشعة القدم", "أشعة المعدة"], correct: 0 },
+    { q: "ما هي العظام التي تحمي القلب والرئتين داخل الصدر؟", options: ["عظام الساق", "القفص الصدري والأضلاع", "عظام اليد"], correct: 1 },
+    { q: "كم عدد عظام يد الإنسان التي تظهر في الأشعة وتساعده على الكتابة؟", options: ["5 عظام", "10 عظام", "27 عظمة"], correct: 2 }
 ];
 
 let currentQ = 0;
