@@ -10,22 +10,23 @@
 
     <header>
         <div class="header-container">
-            <h1 class="school-name">🩻 ماسح الأشعة السينية الرقمي للأطفال</h1>
+            <h1 class="school-name">🩻 ماسح الأشعة السينية الحقيقية للأطفال</h1>
         </div>
         
         <nav class="main-nav">
-            <button class="nav-btn active" onclick="showSection('student-xray', this)">📸 ماسح صورة الطالب</button>
-            <button class="nav-btn" onclick="showSection('organs', this)">🫀 أعضاء الجسم ووظائفها</button>
+            <button class="nav-btn active" onclick="showSection('student-xray', this)">📸 ماسح أشعة الطلاب</button>
+            <button class="nav-btn" onclick="showSection('xray-gallery', this)">🦴 معرض الأشعة الطبية</button>
+            <button class="nav-btn" onclick="showSection('sports', this)">⚽ الحركات الرياضية والعظام</button>
             <button class="nav-btn" onclick="showSection('quiz', this)">🩺 اختبار الطبيب الصغير</button>
         </nav>
     </header>
 
     <div class="container">
 
-        <!-- 📸 قسم رفع صورة الطالب وفحصها بالأشعة -->
+        <!-- 📸 قسم فحص صورة الطالب بالأشعة الحقيقية -->
         <section id="student-xray" class="page-section active">
-            <h2 class="section-title">📸 فحص أشعة الطالب التفاعلي</h2>
-            <p class="section-desc">قم بتحميل صورة الطالب لرؤية هيكله العظمي وأعضائه الداخلية تحت الأشعة السينية!</p>
+            <h2 class="section-title">📸 غرفة الأشعة السينية الرقمية</h2>
+            <p class="section-desc">ارفعي صورة الطالب واضغطي على أي عضو لرؤية الأشعة الطبية الحقيقية فوق صورته!</p>
             
             <div class="upload-box">
                 <label for="imageUpload" class="upload-label">📁 اضغط هنا لتحميل صورة الطالب</label>
@@ -33,51 +34,71 @@
             </div>
 
             <div class="xray-workspace">
-                <!-- كارت عرض الصورة المرفوعة والأشعة -->
                 <div class="scanner-card">
                     <div class="image-wrapper">
-                        <!-- صورة الطالب المرفوعة -->
-                        <img id="studentPhoto" src="https://via.placeholder.com/300x380/1b263b/00b4d8?text=رفع+صورة+الطالب" alt="صورة الطالب">
+                        <!-- صورة الطالب الشخصية -->
+                        <img id="studentPhoto" src="https://via.placeholder.com/280x360/1b263b/00b4d8?text=صورة+الطالب" alt="صورة الطالب">
                         
-                        <!-- طبقة الأشعة السينية فوق صورة الطالب -->
+                        <!-- طبقة صورة الأشعة الحقيقية التي تظهر فوق الطالب -->
                         <div id="xrayOverlay" class="xray-overlay hidden">
-                            <div id="skeletonIcon" class="skeleton-icon">🧠</div>
+                            <img id="xrayRealImage" src="" alt="صورة الأشعة الحقيقية">
                             <div class="scan-line"></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- لوحة التحكم بالفحص -->
                 <div class="scan-controls">
-                    <h3>🔍 اختر العضو المراد فحصه بالـ X-Ray:</h3>
+                    <h3>🔍 اختر نوع الأشعة الطبية:</h3>
                     <div class="xray-buttons">
-                        <button class="x-btn" onclick="scanOrgan('brain', '🧠', 'جمجمة الطالب والدماغ', 'تظهر الأشعة عظام الجمجمة الصلبة لحماية الدماغ والتفكير!')">🧠 فحص الدماغ والجمجمة</button>
-                        <button class="x-btn" onclick="scanOrgan('chest', '🫁', 'القفص الصدري والرئتين', 'تحمي الأضلاع العظمية الرئتين والقلب أثناء التنفس واللعب!')">🫁 القفص الصدري والرئتان</button>
-                        <button class="x-btn" onclick="scanOrgan('heart', '🫀', 'قلب الطالب الأنيق', 'ينبض قلب الطالب ليدفع الدم المحمل بالأكسجين لكامل الجسم!')">🫀 فحص القلب والأوعية</button>
-                        <button class="x-btn" onclick="scanOrgan('bones', '🦴', 'الهيكل العظمي الكامل', 'يعطي الهيكل العظمي الطالب القوام القوي والمستقيم!')">🦴 فحص الهيكل العظمي</button>
+                        <button class="x-btn" onclick="scanRealXray('brain', 'جمجمة الطالب والدماغ (Skull X-Ray)', 'https://images.unsplash.com/photo-1559757175-5700dde675bc?w=500&auto=format&fit=crop&q=80', 'تظهر هذه الأشعة السينية الحقيقية عظام الجمجمة البيضاء الصلبة التي تحمي الدماغ بالداخل.')">🧠 أشعة الجمجمة والدماغ</button>
+                        
+                        <button class="x-btn" onclick="scanRealXray('chest', 'القفص الصدري والرئتين (Chest X-Ray)', 'https://images.unsplash.com/photo-1530497610245-94d3c16cda28?w=500&auto=format&fit=crop&q=80', 'توضح الأضلاع العظمية البيضاء التي تحمي القلب والرئتين السوداويتين أثناء التنفس.')">🫁 أشعة القفص الصدري</button>
+                        
+                        <button class="x-btn" onclick="scanRealXray('hand', 'عظام اليد والأصابع (Hand X-Ray)', 'https://images.unsplash.com/photo-1516549655169-df83a0774514?w=500&auto=format&fit=crop&q=80', 'تكشف عن 27 عظمة دقيقة في كف اليد والأصابع والتي تمكننا من الكتابة بدقة.')">🖐️ أشعة عظام اليد</button>
+                        
+                        <button class="x-btn" onclick="scanRealXray('spine', 'العمود الفقري (Spine X-Ray)', 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=500&auto=format&fit=crop&q=80', 'تظهر الفقرات العظمية المتراصة التي تدعم الجسم وتجعلنا نقف باستقامة.')">🦴 أشعة العمود الفقري</button>
                     </div>
 
-                    <!-- نتيجة الفحص الطبي -->
                     <div id="resultBox" class="result-box">
                         <h4 id="resultTitle">بانتظار إجراء الفحص...</h4>
-                        <p id="resultText">اختر أحد الأزرار أعلاه لبدء مسح الأشعة السينية على صورة الطالب.</p>
+                        <p id="resultText">ارفعي صورة الطالب واختاري نوع الأشعة لمشاهدة التطابق الطبي الرائع.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 🫀 قسم أعضاء الجسم -->
-        <section id="organs" class="page-section">
-            <h2 class="section-title">🫁 رحلة داخل جسم الإنسان</h2>
+        <!-- 🦴 معرض الأشعة الطبية -->
+        <section id="xray-gallery" class="page-section">
+            <h2 class="section-title">🦴 معرض صور الأشعة الطبية الحقيقية</h2>
             <div class="grid">
-                <div class="card"><div class="card-icon">🧠</div><h3>الدماغ (Brain)</h3><p>مركز التحكم والذكاء والتفكير!</p></div>
-                <div class="card"><div class="card-icon">🫀</div><h3>القلب (Heart)</h3><p>المحرك الذي يدفع الدم لجميع أعضاء الجسم.</p></div>
-                <div class="card"><div class="card-icon">🫁</div><h3>الرئتان (Lungs)</h3><p>تزودان الجسم بالأكسجين أثناء الشهيق والزفير.</p></div>
-                <div class="card"><div class="card-icon">🦴</div><h3>العظام (Bones)</h3><p>تحمي الأعضاء الداخلية وتمنح القوة والحركة.</p></div>
+                <div class="card">
+                    <div class="card-icon">🦴</div>
+                    <h3>أشعة الكتف</h3>
+                    <p>توضح مفصل الكتف وعظمة الترقوة بدقة عالية.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🖐️</div>
+                    <h3>أشعة اليد</h3>
+                    <p>تبين عظام الرسغ والأصابع المتصلة.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">💪</div>
+                    <h3>أشعة الكوع</h3>
+                    <p>تظهر المفصل الذي يربط عظام الذراع.</p>
+                </div>
             </div>
         </section>
 
-        <!-- 🩺 قسم الاختيارات -->
+        <!-- ⚽ الحركات الرياضية -->
+        <section id="sports" class="page-section">
+            <h2 class="section-title">⚽ الحركات الرياضية وصحة العظام</h2>
+            <div class="grid">
+                <div class="card"><div class="card-icon">⚽</div><h3>كرة القدم</h3><p>تقوي عظام الساقين وتعزز التحمل البدني.</p></div>
+                <div class="card"><div class="card-icon">🏀</div><h3>القفز وكرة السلة</h3><p>تحفز نمو العظام وتجعلها أقوى وأطول.</p></div>
+            </div>
+        </section>
+
+        <!-- 🩺 الاختبار -->
         <section id="quiz" class="page-section">
             <h2 class="section-title">🩺 اختبر معلوماتك يا طبيب المستقبل</h2>
             <div class="card quiz-card">
