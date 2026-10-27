@@ -24,16 +24,16 @@ function previewStudentImage(event) {
         const output = document.getElementById('studentPhoto');
         output.src = reader.result;
         document.getElementById('xrayOverlay').classList.add('hidden');
-        document.getElementById('resultTitle').innerText = "تمت إضافة صورة الطالب بنجاح! 📸";
-        document.getElementById('resultText').innerText = "اختاري نوع الأشعة السينية الحقيقية من الأزرار أعلاه لمسحها فوق صورة الطالب.";
+        document.getElementById('resultTitle').innerText = "تم رفع صورة الطالب بنجاح! 📸";
+        document.getElementById('resultText').innerText = "اضغطي على أي زر أشعة بالأعلى لمسحها فوق صورة الطالب.";
     };
     if (event.target.files[0]) {
         reader.readAsDataURL(event.target.files[0]);
     }
 }
 
-// تفعيل عرض صورة الأشعة الحقيقية فوق صورة الطالب
-function scanRealXray(type, title, imageUrl, description) {
+// دالة تشغيل الأشعة الحقيقية المباشرة
+function scanRealXray(imageUrl, title, description) {
     const overlay = document.getElementById('xrayOverlay');
     const realImg = document.getElementById('xrayRealImage');
     const resultTitle = document.getElementById('resultTitle');
