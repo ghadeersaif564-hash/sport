@@ -18,14 +18,38 @@ function showSection(sectionId, element) {
     }
 }
 
-// دالة عرض صورة الأشعة الحقيقية المباشرة
-function showXray(type, imageUrl, title, description) {
-    const xrayImg = document.getElementById('displayXrayImage');
+// دالة تحميل صورة الطالب وتصفير الأشعة
+function previewStudentImage(event) {
+    const reader = new FileReader();
+    reader.onload = function() {
+        const output = document.getElementById('studentPhoto');
+        output.src = reader.result;
+        
+        // إخفاء الأشعة السابقة حتى يختار المستخدم جديدة
+        document.getElementById('xrayOverlayImg').classList.add('hidden');
+        document.getElementById('scanLine').classList.add('hidden');
+        
+        document.getElementById('resultTitle').innerText = "تمت إضافة صورة الطالب بنجاح! 📸";
+        document.getElementById('resultText').innerText = "اضغطي الآن على أي زر بالأعلى لتطبيب صورة الأشعة السينية الحقيقية فوق الطالب.";
+    };
+    if (event.target.files[0]) {
+        reader.readAsDataURL(event.target.files[0]);
+    }
+}
+
+// دالة تطبيق صورة الأشعة الحقيقية فوق صورة الطالب
+function applyRealXray(xrayUrl, title, description) {
+    const xrayImg = document.getElementById('xrayOverlayImg');
+    const scanLine = document.getElementById('scanLine');
     const resultTitle = document.getElementById('resultTitle');
     const resultText = document.getElementById('resultText');
 
-    xrayImg.src = imageUrl;
-    resultTitle.innerText = title;
+    // تعيين رابط صورة الأشعة الحقيقية إما قفص صدري أو جمجمة أو يد
+    xrayImg.src = xrayUrl;
+    xrayImg.classList.remove('hidden');
+    scanLine.classList.remove('hidden');
+
+    resultTitle.innerText = `🔍 نتيجة الفحص الطبي: ${title}`;
     resultText.innerText = description;
 }
 
