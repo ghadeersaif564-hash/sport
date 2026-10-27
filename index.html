@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+
+                <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
@@ -14,8 +15,7 @@
         </div>
         
         <nav class="main-nav">
-            <button class="nav-btn active" onclick="showSection('student-xray', this)">📸 ماسح أشعة الطلاب</button>
-            <button class="nav-btn" onclick="showSection('xray-gallery', this)">🦴 معرض الأشعة الطبية</button>
+            <button class="nav-btn active" onclick="showSection('xray-room', this)">🩻 غرفة الأشعة الطبية</button>
             <button class="nav-btn" onclick="showSection('sports', this)">⚽ الحركات الرياضية والعظام</button>
             <button class="nav-btn" onclick="showSection('quiz', this)">🩺 اختبار الطبيب الصغير</button>
         </nav>
@@ -23,57 +23,38 @@
 
     <div class="container">
 
-        <!-- 📸 قسم فحص صورة الطالب -->
-        <section id="student-xray" class="page-section active">
-            <h2 class="section-title">📸 غرفة الأشعة السينية الرقمية</h2>
-            <p class="section-desc">ارفعي صورة الطالب واختاري نوع الفحص لتظهر الأشعة السينية الحقيقية فوق الصورة!</p>
-            
-            <div class="upload-box">
-                <label for="imageUpload" class="upload-label">📁 اضغط هنا لتحميل صورة الطالب</label>
-                <input type="file" id="imageUpload" accept="image/*" onchange="previewStudentImage(event)">
-            </div>
+        <!-- 🩻 غرفة عرض الأشعة الحقيقية للأعضاء -->
+        <section id="xray-room" class="page-section active">
+            <h2 class="section-title">🩻 شاشة عرض الأشعة السينية (X-Ray)</h2>
+            <p class="section-desc">اضغطي على أي عضو من الأزرار أدناه لمشاهدة صورة الأشعة الطبية الحقيقية وشرحها الطبي المبسط!</p>
 
             <div class="xray-workspace">
+                <!-- شاشة عرض الأشعة الحقيقية -->
                 <div class="scanner-card">
                     <div class="image-wrapper">
-                        <!-- صورة الطالب الافتراضية أو المرفوعة -->
-                        <img id="studentPhoto" src="https://images.unsplash.com/photo-1544717305-2782549b5136?w=500&auto=format&fit=crop&q=80" alt="صورة الطالب">
-                        
-                        <!-- طبقة الأشعة الحقيقية -->
-                        <div id="xrayOverlay" class="xray-overlay hidden">
-                            <img id="xrayRealImage" src="" alt="صورة الأشعة">
-                            <div class="scan-line"></div>
-                        </div>
+                        <img id="displayXrayImage" src="https://images.unsplash.com/photo-1530497610245-94d3c16cda28?w=500&auto=format&fit=crop&q=80" alt="صورة الأشعة">
+                        <div class="scan-line"></div>
                     </div>
                 </div>
 
+                <!-- أزرار اختيار الأعضاء والأشعة -->
                 <div class="scan-controls">
-                    <h3>🔍 اختر نوع الأشعة الطبية:</h3>
+                    <h3>🔍 اختر العضو لعرض الأشعة:</h3>
                     <div class="xray-buttons">
-                        <button class="x-btn" onclick="scanRealXray('https://images.unsplash.com/photo-1559757175-5700dde675bc?w=500&auto=format&fit=crop&q=80', 'جمجمة الطالب والدماغ (Skull X-Ray)', 'تظهر هذه الأشعة السينية عظام الجمجمة الصلبة التي تحمي الدماغ والتفكير.')">🧠 أشعة الجمجمة والدماغ</button>
+                        <button class="x-btn" onclick="showXray('heart', 'https://images.unsplash.com/photo-1530497610245-94d3c16cda28?w=500&auto=format&fit=crop&q=80', 'أشعة القلب والقفص الصدري (Heart & Chest)', 'تظهر هذه الأشعة الأضلاع العظمية البيضاء التي تحمي القلب والرئتين السوداويتين أثناء ضخ الدم وتنفس الهواء.')">🫀 أشعة القلب والصدر</button>
                         
-                        <button class="x-btn" onclick="scanRealXray('https://images.unsplash.com/photo-1530497610245-94d3c16cda28?w=500&auto=format&fit=crop&q=80', 'القفص الصدري والرئتين (Chest X-Ray)', 'توضح الأضلاع العظمية البيضاء التي تحمي القلب والرئتين أثناء التنفس.')">🫁 أشعة القفص الصدري</button>
+                        <button class="x-btn" onclick="showXray('bones', 'https://images.unsplash.com/photo-1516549655169-df83a0774514?w=500&auto=format&fit=crop&q=80', 'أشعة عظام اليد (Hand X-Ray)', 'تكشف الأشعة عن 27 عظمة دقيقة في كف اليد والرسغ والتي تمكننا من الإمساك بالأشياء والكتابة بدقة.')">🦴 أشعة عظام اليد</button>
                         
-                        <button class="x-btn" onclick="scanRealXray('https://images.unsplash.com/photo-1516549655169-df83a0774514?w=500&auto=format&fit=crop&q=80', 'عظام اليد والأصابع (Hand X-Ray)', 'تكشف عن 27 عظمة دقيقة في كف اليد والأصابع والتي تمكننا من الكتابة.')">🖐️ أشعة عظام اليد</button>
+                        <button class="x-btn" onclick="showXray('skull', 'https://images.unsplash.com/photo-1559757175-5700dde675bc?w=500&auto=format&fit=crop&q=80', 'أشعة الجمجمة والدماغ (Skull X-Ray)', 'توضح عظام الجمجمة الصلبة والقوية التي تحمي الدماغ ومركز التفكير والذاكرة.')">🧠 أشعة الجمجمة والدماغ</button>
                         
-                        <button class="x-btn" onclick="scanRealXray('https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=500&auto=format&fit=crop&q=80', 'العمود الفقري (Spine X-Ray)', 'تظهر الفقرات العظمية المتراصة التي تدعم الجسم وتجعلنا نقف باستقامة.')">🦴 أشعة العمود الفقري</button>
+                        <button class="x-btn" onclick="showXray('spine', 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=500&auto=format&fit=crop&q=80', 'أشعة العمود الفقري (Spine X-Ray)', 'تظهر الفقرات العظمية المتراصة التي تدعم الجسم بالكامل وتسمح لنا بالانحناء والحركة.')">🦴 أشعة العمود الفقري</button>
                     </div>
 
                     <div id="resultBox" class="result-box">
-                        <h4 id="resultTitle">جاهز للفحص!</h4>
-                        <p id="resultText">تم تحميل صورة افتراضية للطالب، يمكنكِ النقر مباشرة على أي زر بالأعلى لرؤية الأشعة السينية!</p>
+                        <h4 id="resultTitle">أشعة القلب والقفص الصدري</h4>
+                        <p id="resultText">تظهر هذه الأشعة الأضلاع العظمية البيضاء التي تحمي القلب والرئتين السوداويتين أثناء ضخ الدم وتنفس الهواء.</p>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- 🦴 معرض الأشعة -->
-        <section id="xray-gallery" class="page-section">
-            <h2 class="section-title">🦴 معرض صور الأشعة الطبية الحقيقية</h2>
-            <div class="grid">
-                <div class="card"><div class="card-icon">🦴</div><h3>أشعة الكتف</h3><p>توضح مفصل الكتف وعظمة الترقوة.</p></div>
-                <div class="card"><div class="card-icon">🖐️</div><h3>أشعة اليد</h3><p>تبين عظام الرسغ والأصابع.</p></div>
-                <div class="card"><div class="card-icon">💪</div><h3>أشعة الكوع</h3><p>تظهر مفصل الذراع.</p></div>
             </div>
         </section>
 
@@ -82,7 +63,7 @@
             <h2 class="section-title">⚽ الحركات الرياضية وصحة العظام</h2>
             <div class="grid">
                 <div class="card"><div class="card-icon">⚽</div><h3>كرة القدم</h3><p>تقوي عظام الساقين وتعزز التحمل البدني.</p></div>
-                <div class="card"><div class="card-icon">🏀</div><h3>القفز</h3><p>تحفز نمو العظام وتجعلها أقوى.</p></div>
+                <div class="card"><div class="card-icon">🏀</div><h3>القفز</h3><p>تحفز نمو العظام وتجعلها أقوى وأطول.</p></div>
             </div>
         </section>
 
