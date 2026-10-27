@@ -18,36 +18,19 @@ function showSection(sectionId, element) {
     }
 }
 
-function previewStudentImage(event) {
-    const reader = new FileReader();
-    reader.onload = function() {
-        const output = document.getElementById('studentPhoto');
-        output.src = reader.result;
-        document.getElementById('xrayOverlay').classList.add('hidden');
-        document.getElementById('resultTitle').innerText = "تم رفع صورة الطالب بنجاح! 📸";
-        document.getElementById('resultText').innerText = "اضغطي على أي زر أشعة بالأعلى لمسحها فوق صورة الطالب.";
-    };
-    if (event.target.files[0]) {
-        reader.readAsDataURL(event.target.files[0]);
-    }
-}
-
-// دالة تشغيل الأشعة الحقيقية المباشرة
-function scanRealXray(imageUrl, title, description) {
-    const overlay = document.getElementById('xrayOverlay');
-    const realImg = document.getElementById('xrayRealImage');
+// دالة عرض صورة الأشعة الحقيقية المباشرة
+function showXray(type, imageUrl, title, description) {
+    const xrayImg = document.getElementById('displayXrayImage');
     const resultTitle = document.getElementById('resultTitle');
     const resultText = document.getElementById('resultText');
 
-    realImg.src = imageUrl;
-    overlay.classList.remove('hidden');
-    
-    resultTitle.innerText = `🔍 نتائج فحص: ${title}`;
+    xrayImg.src = imageUrl;
+    resultTitle.innerText = title;
     resultText.innerText = description;
 }
 
 const quizQuestions = [
-    { q: "أي نوع من الأشعة يظهر عظام الجمجمة التي تحمي الدماغ؟", options: ["أشعة الجمجمة والراس", "أشعة القدم", "أشعة المعدة"], correct: 0 },
+    { q: "أي نوع من الأشعة يظهر عظام الجمجمة التي تحمي الدماغ؟", options: ["أشعة الجمجمة والدماغ", "أشعة القدم", "أشعة المعدة"], correct: 0 },
     { q: "ما هي العظام التي تحمي القلب والرئتين داخل الصدر؟", options: ["عظام الساق", "القفص الصدري والأضلاع", "عظام اليد"], correct: 1 },
     { q: "كم عدد عظام يد الإنسان التي تظهر في الأشعة وتساعده على الكتابة؟", options: ["5 عظام", "10 عظام", "27 عظمة"], correct: 2 }
 ];
