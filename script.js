@@ -1,3 +1,5 @@
+let uploadedStudentImage = "https://images.unsplash.com/photo-1544717305-2782549b5136?w=500&auto=format&fit=crop&q=80";
+
 function showSection(sectionId, element) {
     const sections = document.querySelectorAll('.page-section');
     sections.forEach(sec => sec.style.display = 'none');
@@ -18,43 +20,44 @@ function showSection(sectionId, element) {
     }
 }
 
-// دالة تحميل صورة الطالب وتصفير الأشعة
+// حفظ صورة الطالب المرفوعة في الذاكرة
 function previewStudentImage(event) {
     const reader = new FileReader();
     reader.onload = function() {
-        const output = document.getElementById('studentPhoto');
-        output.src = reader.result;
+        uploadedStudentImage = reader.result;
+        const screen = document.getElementById('displayScreen');
+        screen.src = uploadedStudentImage;
         
-        // إخفاء الأشعة السابقة حتى يختار المستخدم جديدة
-        document.getElementById('xrayOverlayImg').classList.add('hidden');
         document.getElementById('scanLine').classList.add('hidden');
-        
-        document.getElementById('resultTitle').innerText = "تمت إضافة صورة الطالب بنجاح! 📸";
-        document.getElementById('resultText').innerText = "اضغطي الآن على أي زر بالأعلى لتطبيب صورة الأشعة السينية الحقيقية فوق الطالب.";
+        document.getElementById('resultTitle').innerText = "تم رفع صورة الطالب بنجاح! 📸";
+        document.getElementById('resultText').innerText = "اضغطي الآن على أي زر فحص لعرض صورة الأشعة السينية الخاصة بذلك العضو.";
     };
     if (event.target.files[0]) {
         reader.readAsDataURL(event.target.files[0]);
     }
 }
 
-// دالة تطبيق صورة الأشعة الحقيقية فوق صورة الطالب
-function applyRealXray(xrayUrl, title, description) {
-    const xrayImg = document.getElementById('xrayOverlayImg');
+// استبدال الشاشة بصورة الأشعة السينية الواضحة
+function showRealXray(xrayUrl, title, description) {
+    const screen = document.getElementById('displayScreen');
     const scanLine = document.getElementById('scanLine');
     const resultTitle = document.getElementById('resultTitle');
     const resultText = document.getElementById('resultText');
 
-    // تعيين رابط صورة الأشعة الحقيقية إما قفص صدري أو جمجمة أو يد
-    xrayImg.src = xrayUrl;
-    xrayImg.classList.remove('hidden');
+    // إظهار خط المسح لإعطاء شعور بالتفاعل
     scanLine.classList.remove('hidden');
+    
+    setTimeout(() => {
+        screen.src = xrayUrl;
+        scanLine.classList.add('hidden');
+    }, 500);
 
-    resultTitle.innerText = `🔍 نتيجة الفحص الطبي: ${title}`;
+    resultTitle.innerText = `🔍 نتائج الفحص الطبي: ${title}`;
     resultText.innerText = description;
 }
 
 const quizQuestions = [
-    { q: "أي نوع من الأشعة يظهر عظام الجمجمة التي تحمي الدماغ؟", options: ["أشعة الجمجمة والدماغ", "أشعة القدم", "أشعة المعدة"], correct: 0 },
+    { q: "أي نوع من الأشعة يظهر عظام الجمجمة التي تحمي الدماغ؟", options: ["أشعة الجمجمة والراس", "أشعة القدم", "أشعة المعدة"], correct: 0 },
     { q: "ما هي العظام التي تحمي القلب والرئتين داخل الصدر؟", options: ["عظام الساق", "القفص الصدري والأضلاع", "عظام اليد"], correct: 1 },
     { q: "كم عدد عظام يد الإنسان التي تظهر في الأشعة وتساعده على الكتابة؟", options: ["5 عظام", "10 عظام", "27 عظمة"], correct: 2 }
 ];
