@@ -22,10 +22,10 @@
 
     <div class="container">
 
-        <!-- 📸 قسم فحص الطالب وعرض الأشعة المنفصلة -->
+        <!-- 📸 قسم فحص الطالب وعرض الأشعة المنفصلة بنفس نمط الصورة -->
         <section id="student-xray" class="page-section active">
-            <h2 class="section-title">📸 غرفة فحص الأشعة السينية</h2>
-            <p class="section-desc">ارفعي صورة الطالب، ثم اضغطي على أي زر فحص لتتحول الصورة إلى صورة الأشعة السينية الحقيقية لذلك الجزء!</p>
+            <h2 class="section-title">📸 غرفة فحص الأشعة السينية المتقدمة</h2>
+            <p class="section-desc">ارفعي صورة الطالب، ثم اضغطي على أي زر فحص لتتحول الشاشة إلى صورة الأشعة السينية الواضحة لذلك الجزء!</p>
             
             <div class="upload-box">
                 <label for="imageUpload" class="upload-label">📁 اضغط هنا لتحميل صورة الطالب الأساسية</label>
@@ -35,28 +35,28 @@
             <div class="xray-workspace">
                 <div class="scanner-card">
                     <div class="image-wrapper">
-                        <!-- الشاشة التي تعرض إما صورة الطالب أو صورة الأشعة الحقيقية عند الضغط -->
+                        <!-- الشاشة التي تعرض صورة الطالب أو الأشعة -->
                         <img id="displayScreen" src="https://images.unsplash.com/photo-1544717305-2782549b5136?w=500&auto=format&fit=crop&q=80" alt="شاشة العرض">
                         <div id="scanLine" class="scan-line hidden"></div>
                     </div>
                 </div>
 
-                <!-- أزرار الفحص التي تستبدل الصورة بصورة الأشعة الحقيقية -->
+                <!-- أزرار الفحص لتغيير الشاشة لأشعة الأعضاء -->
                 <div class="scan-controls">
-                    <h3>🔍 اختر الفحص المطلوب (تتحول الصورة فوراً):</h3>
+                    <h3>🔍 اختر العضو لفحص الأشعة السينية:</h3>
                     <div class="xray-buttons">
-                        <button class="x-btn" onclick="showRealXray('https://www.google.com/imgres?q=%D8%A7%D8%B4%D8%B9%D8%A9%20%D8%AC%D8%B3%D9%85&imgurl=https%3A%2F%2Fthumb.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2Ff%2Ffc%2FChest_X-ray.jpg%2F250px-Chest_X-ray.jpg%3Futm_source%3Dar.wikipedia.org%26utm_campaign%3Dparser%26utm_content%3Dthumbnail&imgrefurl=https%3A%2F%2Far.wikipedia.org%2Fwiki%2F%25D8%25A3%25D8%25B4%25D8%25B9%25D8%25A9_%25D8%25B3%25D9%258A%25D9%2586%25D9%258A%25D8%25A9&docid=VGWX2JBifYgvVM&tbnid=_sNAabgZCOsPWM&vet=12ahUKEwi8uO6E-9uXAxV7W0EAHQ8IN4kQnPAOegQIOxAA..i&w=250&h=280&hcb=2&ved=2ahUKEwi8uO6E-9uXAxV7W0EAHQ8IN4kQnPAOegQIOxAA', 'أشعة القفص الصدري الحقيقية (Chest X-Ray)', 'تظهر هذه الأشعة الحقيقية عظام القفص الصدري والأضلاع لحماية القلب والرئتين[cite: 7].')">🫁 أشعة القفص الصدري الحقيقية[cite: 7]</button>
+                        <button class="x-btn" onclick="showRealXray('https://images.unsplash.com/photo-1516549655169-df83a0774514?w=500&auto=format&fit=crop&q=80', 'أشعة كف اليد والأصابع', 'توضح عظام كف اليد والدبابيس العظمية الدقيقة للأصابع التي تمكننا من الكتابة.')">🖐️ أشعة عظام اليد</button>
                         
-                        <button class="x-btn" onclick="showRealXray('https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Skull_X-ray_%28lateral%29.jpg/440px-Skull_X-ray_%28lateral%29.jpg', 'أشعة الجمجمة والرقبة الحقيقية (Skull X-Ray)', 'توضح هذه الأشعة عظام الجمجمة الصلبة والفقرات التي تحمي الدماغ بالكامل[cite: 7].')">🧠 أشعة الجمجمة الحقيقية[cite: 7]</button>
+                        <button class="x-btn" onclick="showRealXray('https://images.unsplash.com/photo-1530497610245-94d3c16cda28?w=500&auto=format&fit=crop&q=80', 'أشعة القفص الصدري والأضلاع', 'تظهر الأضلاع العظمية البيضاء التي تحمي القلب والرئتين أثناء التنفس.')">🫁 أشعة القفص الصدري</button>
                         
-                        <button class="x-btn" onclick="showRealXray('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Hand_X-Ray_pa_rm.jpg/450px-Hand_X-Ray_pa_rm.jpg', 'أشعة عظام اليد الحقيقية (Hand X-Ray)', 'تظهر عظام كف اليد والدبابيس العظمية الدقيقة للأصابع تحت أشعة X-Ray[cite: 7].')">🖐️ أشعة عظام اليد الحقيقية[cite: 7]</button>
+                        <button class="x-btn" onclick="showRealXray('https://images.unsplash.com/photo-1559757175-5700dde675bc?w=500&auto=format&fit=crop&q=80', 'أشعة جمجمة الرأس والدماغ', 'توضح عظام الجمجمة الصلبة والقوية التي تحمي الدماغ ومركز التفكير.')">🧠 أشعة الجمجمة والراس</button>
                         
-                        <button class="x-btn" onclick="showRealXray('https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Spine_X-ray_normal.jpg/400px-Spine_X-ray_normal.jpg', 'أشعة العمود الفقري الحقيقية (Spine X-Ray)', 'توضح سلسلة الفقرات العظمية التي تمنح الطالب القوام المستقيم والقدرة على الانحناء[cite: 7].')">🦴 أشعة العمود الفقري الحقيقية[cite: 7]</button>
+                        <button class="x-btn" onclick="showRealXray('https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=500&auto=format&fit=crop&q=80', 'أشعة العمود الفقري والحوض', 'تظهر الفقرات العظمية المتراصة وعظمة الحوض التي تدعم قوام الجسم.')">🦴 أشعة الحوض والعمود الفقري</button>
                     </div>
 
                     <div id="resultBox" class="result-box">
                         <h4 id="resultTitle">جاهز للفحص الطبي!</h4>
-                        <p id="resultText">ارفعي صورة الطالب، ثم انقري على أي زر فحص بالأعلى لتحويل الشاشة إلى صورة الأشعة الحقيقية للجزء المختار[cite: 7].</p>
+                        <p id="resultText">ارفعي صورة الطالب، ثم انقري على أي زر فحص بالأعلى لتحويل الشاشة إلى صورة الأشعة الحقيقية للجزء المختار.</p>
                     </div>
                 </div>
             </div>
