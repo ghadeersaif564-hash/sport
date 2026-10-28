@@ -10,11 +10,11 @@
 
     <header>
         <div class="header-container">
-            <h1 class="school-name">🩻 ماسح الأشعة للأجزاء المحددة للجسم</h1>
+            <h1 class="school-name">🩻 ماسح الأشعة السينية الحقيقية للطالب</h1>
         </div>
         
         <nav class="main-nav">
-            <button class="nav-btn active" onclick="showSection('student-xray', this)">📸 مسح صورة الطالب</button>
+            <button class="nav-btn active" onclick="showSection('student-xray', this)">📸 مسح صورة الطالب بالأشعة</button>
             <button class="nav-btn" onclick="showSection('sports', this)">⚽ الحركات الرياضية والعظام</button>
             <button class="nav-btn" onclick="showSection('quiz', this)">🩺 اختبار الطبيب الصغير</button>
         </nav>
@@ -22,10 +22,10 @@
 
     <div class="container">
 
-        <!-- 📸 قسم رفع صورة الطالب ومسح الأجزاء المحددة بالأشعة -->
+        <!-- 📸 قسم رفع صورة الطالب ومسحها بالـ X-Ray الحقيقي -->
         <section id="student-xray" class="page-section active">
-            <h2 class="section-title">📸 غرفة الأشعة المحددة</h2>
-            <p class="section-desc">ارفعي صورة الطالب واختاري الجزء المحدد لمسحه بالأشعة السينية الحقيقية!</p>
+            <h2 class="section-title">📸 غرفة فحص أشعة الطالب الطبية</h2>
+            <p class="section-desc">ارفعي صورة الطالب واختاري نوع الفحص لتنطبق الأشعة العظمية الطبية الحقيقية فوقه مباشرة!</p>
             
             <div class="upload-box">
                 <label for="imageUpload" class="upload-label">📁 اضغط هنا لتحميل صورة الطالب</label>
@@ -33,36 +33,35 @@
             </div>
 
             <div class="xray-workspace">
-                <!-- كارت عرض الصورة المرفوعة مع تداخل الأشعة المحددة -->
                 <div class="scanner-card">
                     <div class="image-wrapper" id="imageContainer">
                         <!-- صورة الطالب المرفوعة -->
                         <img id="studentPhoto" src="https://images.unsplash.com/photo-1544717305-2782549b5136?w=500&auto=format&fit=crop&q=80" alt="صورة الطالب">
                         
-                        <!-- إطار الأشعة السينية المحدد للجزء المطلوب -->
-                        <div id="xrayCropFrame" class="xray-crop-frame hidden">
-                            <img id="xrayOverlayImg" class="xray-overlay-img" src="" alt="أشعة حقيقية">
-                            <div class="scan-line"></div>
-                        </div>
+                        <!-- صورة الأشعة السينية الحقيقية الطبية المتداخلة -->
+                        <img id="xrayOverlayImg" class="xray-overlay-img hidden" src="" alt="أشعة حقيقية">
+                        
+                        <!-- خط المسح الضوئي -->
+                        <div id="scanLine" class="scan-line hidden"></div>
                     </div>
                 </div>
 
-                <!-- أزرار اختيار الأجزاء المحددة -->
+                <!-- أزرار اختيار نوع الأشعة السينية الحقيقية -->
                 <div class="scan-controls">
-                    <h3>🔍 اختر الجزء المراد فحصه بالـ X-Ray:</h3>
+                    <h3>🔍 اختر الأشعة السينية المراد عرضها على الطالب[cite: 7]:</h3>
                     <div class="xray-buttons">
-                        <button class="x-btn" onclick="applyPartXray('head', 'https://images.unsplash.com/photo-1559757175-5700dde675bc?w=500&auto=format&fit=crop&q=80', 'أشعة الجمجمة والدماغ (Head X-Ray)', 'توضح الأشعة الحقيقية عظام الجمجمة الصلبة التي تحمي الدماغ والتفكير.')">🧠 أشعة الرأس والجمجمة</button>
+                        <button class="x-btn" onclick="applyRealXray('https://upload.wikimedia.org/wikipedia/commons/thumb/c/a0/Chest_Xray_PA_3-8-2010.png/500px-Chest_Xray_PA_3-8-2010.png', 'أشعة القفص الصدري الحقيقية (Chest X-Ray)', 'تظهر هذه الأشعة السينية الحقيقية عظام القفص الصدري والأضلاع لحماية القلب والرئتين[cite: 7]!')">🫁 أشعة القفص الصدري الحقيقية[cite: 7]</button>
                         
-                        <button class="x-btn" onclick="applyPartXray('chest', 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/a0/Chest_Xray_PA_3-8-2010.png/500px-Chest_Xray_PA_3-8-2010.png', 'أشعة القفص الصدري (Chest X-Ray)', 'تظهر الأشعة الحقيقية عظام القفص الصدري والأضلاع التي تحمي القلب والرئتين.')">🫁 أشعة الصدر والأضلاع</button>
+                        <button class="x-btn" onclick="applyRealXray('https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Skull_X-ray_%28lateral%29.jpg/440px-Skull_X-ray_%28lateral%29.jpg', 'أشعة الجمجمة والرقبة الحقيقية (Skull X-Ray)', 'توضح هذه الأشعة عظام الجمجمة الصلبة والفقرات التي تحمي الدماغ بالكامل[cite: 7].')">🧠 أشعة الجمجمة والرقبة الحقيقية[cite: 7]</button>
                         
-                        <button class="x-btn" onclick="applyPartXray('hand', 'https://images.unsplash.com/photo-1516549655169-df83a0774514?w=500&auto=format&fit=crop&q=80', 'أشعة كف اليد والأصابع (Hand X-Ray)', 'تكشف الأشعة الحقيقية عن 27 عظمة دقيقة في كف اليد والأصابع.')">🖐️ أشعة اليد والأصابع</button>
+                        <button class="x-btn" onclick="applyRealXray('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Hand_X-Ray_pa_rm.jpg/450px-Hand_X-Ray_pa_rm.jpg', 'أشعة عظام اليد الحقيقية (Hand X-Ray)', 'تظهر عظام كف اليد والدبابيس العظمية الدقيقة للأصابع تحت أشعة X-Ray[cite: 7].')">🖐️ أشعة عظام اليد الحقيقية[cite: 7]</button>
                         
-                        <button class="x-btn" onclick="applyPartXray('spine', 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=500&auto=format&fit=crop&q=80', 'أشعة العمود الفقري (Spine X-Ray)', 'تظهر الفقرات العظمية المتراصة المنتصفة للجسم والتي تمنحه القوام المستقيم.')">🦴 أشعة العمود الفقري</button>
+                        <button class="x-btn" onclick="applyRealXray('https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Spine_X-ray_normal.jpg/400px-Spine_X-ray_normal.jpg', 'أشعة العمود الفقري الحقيقية (Spine X-Ray)', 'توضح سلسلة الفقرات العظمية التي تمنح الطالب القوام المستقيم والقدرة على الانحناء[cite: 7].')">🦴 أشعة العمود الفقري الحقيقية[cite: 7]</button>
                     </div>
 
                     <div id="resultBox" class="result-box">
                         <h4 id="resultTitle">بانتظار الفحص...</h4>
-                        <p id="resultText">ارفعي صورة الطالب واختاري الجزء المحدد بالأعلى لرؤية الأشعة محددة على مكانه الفعلي!</p>
+                        <p id="resultText">ارفعي صورة الطالب واضغطي على أي زر بالأعلى لتنطبق الأشعة العظمية الطبية الحقيقية على صورته مباشرة[cite: 7]!</p>
                     </div>
                 </div>
             </div>
